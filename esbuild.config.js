@@ -44,8 +44,11 @@ const baseConfig = {
   ],
   banner: {
     js: `/*!
- * Sienna Accessibility Widget v${packageJson.version}
+ * Sienna Accessibility Widget v${packageJson.version} custom build for strict CSP
  * (c) ${new Date().getFullYear()} ${packageJson.author}
+ * 
+ * NOTE: This is a forked version of the original Sienna Accessibility Widget.
+ * 
  * License: ${packageJson.license}
  * Home Page: ${packageJson.homepage}
  * Repository: ${packageJson.repository.url}
