@@ -17,6 +17,15 @@
     letter-spacing: 0.015em;
 }
 
+.asw-menu.asw-menu-right {
+    right: 0px;
+    left: auto;
+}
+
+.asw-hidden {
+    display: none !important;
+}
+
 .asw-menu * {
     color: #000 !important;
     font-family: inherit;
@@ -51,8 +60,21 @@
     max-height: 24px !important;
 }
 
-.asw-menu-header > div {
-    display: flex;
+.asw-menu-header-actions {
+    gap: 15px;
+}
+
+.asw-adjust-font .asw-label {
+    margin: 0;
+}
+
+.asw-adjust-font .asw-label svg {
+    margin-right: 15px;
+}
+
+.asw-footer a span {
+    font-weight: 700;
+    color: inherit;
 }
 
 .asw-menu-reset,

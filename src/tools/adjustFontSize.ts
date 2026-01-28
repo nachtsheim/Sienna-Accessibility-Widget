@@ -24,6 +24,6 @@ export default function adjustFontSize(multiply:number = 1) {
 
             // Calculate and apply new font size
             const newFontSize = orgFontSize * multiply;
-            el.style.fontSize = `${newFontSize}px`;
+            el.style.setProperty('font-size', `${newFontSize}px`, 'important');
         });
 }

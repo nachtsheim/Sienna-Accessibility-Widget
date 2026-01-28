@@ -9,6 +9,7 @@ export function openMenu() {
         toggleMenu();
     } else {
         $menu = renderMenu();
+        toggleMenu();
     }
     
     translateWidget();

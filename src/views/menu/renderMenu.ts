@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error: html template
 import template from "./menu.html";
 
 import FilterButtons from "./FilterButtons";
@@ -19,27 +19,42 @@ import { userSettings, saveUserSettings } from "@/globals/userSettings";
 import { changeLanguage } from "@/i18n/changeLanguage";
 import toggleMenu from "./toggleMenu";
 import { $widget } from "../widget/widget";
+import { getNonce } from "@/utils/getNonce";
+import { getTrustedHTML } from "@/utils/trustedTypes";
 
 export default function renderMenu() {
     const $container: HTMLElement = document.createElement("div");
-    $container.innerHTML = `<style>${css}</style>` + template;
+    
+    const style = document.createElement('style');
+    const nonce = getNonce();
+    if (nonce) {
+        style.setAttribute("nonce", nonce);
+    }
+    style.textContent = css;
+    $container.appendChild(style);
 
-    const $menu = $container.querySelector(".asw-menu");
+    $container.insertAdjacentHTML('beforeend', getTrustedHTML(template) as string);
+
+    const $menu = $container.querySelector(".asw-menu") as HTMLElement;
+    $menu.classList.add('asw-hidden');
+
+    const $overlay = $container.querySelector(".asw-overlay") as HTMLElement;
+    $overlay.classList.add('asw-hidden');
+
     if (pluginConfig?.position?.includes("right")) {
-        $menu.style.right = '0px';
-        $menu.style.left = 'auto';
+        $menu.classList.add('asw-menu-right');
     }
 
-    $menu.querySelector(".content").innerHTML = renderButtons(ContentButtons);
-    $menu.querySelector(".tools").innerHTML = renderButtons(ToolButtons, 'asw-tools');
-    $menu.querySelector(".contrast").innerHTML = renderButtons(FilterButtons, 'asw-filter');
+    $menu.querySelector(".content").insertAdjacentHTML('beforeend', getTrustedHTML(renderButtons(ContentButtons)) as string);
+    $menu.querySelector(".tools").insertAdjacentHTML('beforeend', getTrustedHTML(renderButtons(ToolButtons, 'asw-tools')) as string);
+    $menu.querySelector(".contrast").insertAdjacentHTML('beforeend', getTrustedHTML(renderButtons(FilterButtons, 'asw-filter')) as string);
 
     // *** States UI Rendering ***
     const states = userSettings?.states;
 
     const fontSize = Number(states?.fontSize) || 1;
     if (fontSize != 1) {
-        $menu.querySelector(".asw-amount").innerHTML = `${fontSize * 100}%`;
+        $menu.querySelector(".asw-amount").textContent = `${fontSize * 100}%`;
     }
 
     if (states) {
@@ -63,9 +78,13 @@ export default function renderMenu() {
         userSettings.lang = "en";
     }
 
-    const $lang = $menu.querySelector("#asw-language");
-    const langOptions = LANGUAGES.map((lang: ILanguage) => `<option value="${lang.code}">${lang.label}</option>`).join('');
-    $lang.innerHTML = langOptions;
+    const $lang = $menu.querySelector("#asw-language") as HTMLSelectElement;
+    LANGUAGES.forEach((lang: ILanguage) => {
+        const option = document.createElement('option');
+        option.value = lang.code;
+        option.textContent = lang.label;
+        $lang.appendChild(option);
+    });
     $lang.value = userSettings.lang;
     $lang.addEventListener("change", (event) => {
         changeLanguage(event.target.value);
@@ -138,5 +157,5 @@ export default function renderMenu() {
 
     $widget.appendChild($container);
 
-    return $container;
+    return $menu;
 }

@@ -1,3 +1,5 @@
+import { getNonce } from "./getNonce";
+
 export interface IAddStylesheetArgs {
     id: string,
     css: string
@@ -8,11 +10,20 @@ export default function addStylesheet({
     css
 }: IAddStylesheetArgs) {
     if(css) {
-        const style = document.getElementById(id || '') || document.createElement('style');
-        style.innerHTML = css;
-        if(!style.id) {
-            style.id = id;
+        let style = document.getElementById(id || '') as HTMLStyleElement;
+
+        if (!style) {
+            style = document.createElement('style');
+            if (id) {
+                style.id = id;
+            }
+            const nonce = getNonce();
+            if (nonce) {
+                style.setAttribute("nonce", nonce);
+            }
             document.head.appendChild(style);
         }
+
+        style.textContent = css;
     }
 }

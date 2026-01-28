@@ -9,3 +9,13 @@
     background-color: rgba(0,0,0,.8);
     z-index: 1000000;
 }
+
+.asw-rg-top {
+    height: var(--asw-rg-top-height, 0);
+}
+
+.asw-rg-bottom {
+    top: auto;
+    bottom: 0;
+    height: var(--asw-rg-bottom-height, 0);
+}

@@ -16,8 +16,6 @@
 .asw-menu-btn {
     position: fixed;
     z-index: 500000;
-    left: 30px;
-    bottom: 30px;
     box-shadow: 0 5px 15px 0 rgb(37 44 97 / 15%), 0 2px 4px 0 rgb(93 100 148 / 20%);
     transition: transform .2s ease;
     border-radius: 50%;
@@ -34,7 +32,58 @@
     background: linear-gradient(96deg, rgba(50,108,255,1) 0%, rgba(0,72,255,1) 100%) !important;
 }
 
+.asw-widget-bottom-left .asw-menu-btn {
+    bottom: var(--asw-widget-offset-y, 25px);
+    left: var(--asw-widget-offset-x, 20px);
+}
+
+.asw-widget-bottom-right .asw-menu-btn {
+    bottom: var(--asw-widget-offset-y, 25px);
+    right: var(--asw-widget-offset-x, 20px);
+    left: auto;
+}
+
+.asw-widget-top-left .asw-menu-btn {
+    top: var(--asw-widget-offset-y, 25px);
+    left: var(--asw-widget-offset-x, 20px);
+    bottom: auto;
+}
+
+.asw-widget-top-right .asw-menu-btn {
+    top: var(--asw-widget-offset-y, 25px);
+    right: var(--asw-widget-offset-x, 20px);
+    left: auto;
+    bottom: auto;
+}
+
+.asw-widget-center-left .asw-menu-btn {
+    left: var(--asw-widget-offset-x, 20px);
+    bottom: var(--asw-widget-center-y);
+}
+
+.asw-widget-center-right .asw-menu-btn {
+    right: var(--asw-widget-offset-x, 20px);
+    left: auto;
+    bottom: var(--asw-widget-center-y);
+}
+
+.asw-widget-bottom-center .asw-menu-btn {
+    bottom: var(--asw-widget-offset-y, 25px);
+    left: var(--asw-widget-center-x);
+}
+
+.asw-widget-top-center .asw-menu-btn {
+    top: var(--asw-widget-offset-y, 25px);
+    bottom: auto;
+    left: var(--asw-widget-center-x);
+}
+
+.asw-container.asw-menu-opened .asw-menu-btn {
+    display: none !important;
+}
+
 .asw-menu-btn svg {
+    fill: white;
     width: 36px;
     height: 36px;
     min-height: 36px;

@@ -22,8 +22,8 @@ export default function disableAnimatedImages(enable = false) {
 
                 img.dataset.aswOrgSrc = img.src;
                 img.src = staticImageBase64;
-                img.style.width = `${naturalWidth}px`;
-                img.style.height = `${naturalHeight}px`;
+                img.style.setProperty('width', `${naturalWidth}px`);
+                img.style.setProperty('height', `${naturalHeight}px`);
             } else {
                 img.src = img.dataset.aswOrgSrc || src;  // Restore the original GIF
                 img.alt = '';

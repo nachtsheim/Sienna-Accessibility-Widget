@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error: html template
 import template from "./widget.html";
 import css from "./widget.css";
 import { openMenu } from "../menu/menu";
@@ -8,15 +8,40 @@ import {
     pluginConfig
 } from "@/globals/pluginConfig";
 
+import { getNonce } from "@/utils/getNonce";
+import { getTrustedHTML } from "@/utils/trustedTypes";
+
 export let $widget: HTMLElement;
 
 export function renderWidget() {
     $widget = document.createElement("div");
     $widget.classList.add("asw-container");
-    $widget.innerHTML = `<style>${css}</style>${template}`;
+    
+    const {
+        position = "bottom-left",
+        offset = [20, 25]
+    } = pluginConfig;
+
+    $widget.classList.add(`asw-widget-${position}`);
+
+    const [offsetX = 20, offsetY = 25] = offset;
+
+    $widget.style.setProperty('--asw-widget-offset-x', `${offsetX}px`);
+    $widget.style.setProperty('--asw-widget-offset-y', `${offsetY}px`);
+    $widget.style.setProperty('--asw-widget-center-y', `calc(50% - 29px - ${offsetY}px)`); // 58px / 2 = 29
+    $widget.style.setProperty('--asw-widget-center-x', `calc(50% - 29px - ${offsetX}px)`);
+
+    const style = document.createElement('style');
+    const nonce = getNonce();
+    if (nonce) {
+        style.setAttribute("nonce", nonce);
+    }
+    style.textContent = css;
+    $widget.appendChild(style);
+
+    $widget.insertAdjacentHTML('beforeend', getTrustedHTML(template) as string);
 
     const $btn: HTMLElement = $widget.querySelector(".asw-menu-btn");
-    Object.assign($btn.style, getButtonStyle());
     
     $btn?.addEventListener("click", (event) => {
         event.preventDefault();
@@ -33,65 +58,6 @@ export function renderWidget() {
     return $widget;
 }
 
-function getButtonStyle() {
-    const {
-        position = "bottom-left",
-        offset = [20, 20]
-    } = pluginConfig;
-
-    const [offsetX = 20, offsetY = 25] = offset;
-
-    const centerY = `calc(50% - 27.5px - ${offsetY}px)`; // 55px / 2 = 27.5
-    const centerX = `calc(50% - 27.5px - ${offsetX}px)`;
-
-    switch (position) {
-        case "bottom-right":
-            return {
-                bottom: `${offsetY}px`,
-                right: `${offsetX}px`,
-                left: "auto"
-            };
-        case "top-left":
-            return {
-                top: `${offsetY}px`,
-                left: `${offsetX}px`,
-                bottom: "auto"
-            };
-        case "top-right":
-            return {
-                top: `${offsetY}px`,
-                right: `${offsetX}px`,
-                left: "auto",
-                bottom: "auto"
-            };
-        case "center-left":
-            return {
-                left: `${offsetX}px`,
-                bottom: centerY
-            };
-        case "center-right":
-            return {
-                right: `${offsetX}px`,
-                left: "auto",
-                bottom: centerY
-            };
-        case "bottom-center":
-            return {
-                bottom: `${offsetY}px`,
-                left: centerX
-            };
-        case "top-center":
-            return {
-                top: `${offsetY}px`,
-                bottom: "auto",
-                left: centerX
-            };
-        default: // "bottom-left"
-            return {
-                bottom: `${offsetY}px`,
-                left: `${offsetX}px`
-            };
-    }
-}
+// remove getButtonStyle function as it is no longer used
 
 
