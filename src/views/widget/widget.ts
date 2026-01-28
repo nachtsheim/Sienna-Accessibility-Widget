@@ -15,7 +15,7 @@ export let $widget: HTMLElement;
 
 export function renderWidget() {
     $widget = document.createElement("div");
-    $widget.classList.add("asw-container");
+    $widget.classList.add("asw", "asw-container");
     
     const {
         position = "bottom-left",

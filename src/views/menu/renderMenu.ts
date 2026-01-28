@@ -36,7 +36,7 @@ export default function renderMenu() {
     $container.insertAdjacentHTML('beforeend', getTrustedHTML(template) as string);
 
     const $menu = $container.querySelector(".asw-menu") as HTMLElement;
-    $menu.classList.add('asw-hidden');
+    $menu.classList.add('asw', 'asw-hidden');
 
     const $overlay = $container.querySelector(".asw-overlay") as HTMLElement;
     $overlay.classList.add('asw-hidden');

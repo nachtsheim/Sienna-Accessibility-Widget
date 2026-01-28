@@ -42,7 +42,7 @@
     padding: 10px 15px;
     height: 55px;
     font-weight: 700 !important;
-    background-color: #0848ca !important;
+    background-color: var(--asw-primary-color) !important;
 }
 
 .asw-menu-title {
@@ -51,7 +51,7 @@
 }
 
 .asw-menu-header svg {
-    fill: #0848ca !important;
+    fill: var(--asw-primary-color) !important;
     width: 24px !important;
     height: 24px !important;
     min-width: 24px !important;
@@ -96,7 +96,7 @@
     font-size: 15px !important;
     font-weight: 600 !important;
     padding: 15px !important;
-    background: #0848ca !important;
+    background: var(--asw-primary-color) !important;
     color: #fff !important;
 }
 
@@ -179,7 +179,7 @@
 
 .asw-plus:hover,
 .asw-minus:hover {
-    border-color: #0848ca !important;
+    border-color: var(--asw-primary-color) !important;
 }
 
 .asw-amount {
@@ -207,13 +207,13 @@
 
 .asw-btn:hover,
 .asw-btn.asw-selected {
-    border-color: #0848ca !important;
+    border-color: var(--asw-primary-color) !important;
 }
 
 .asw-btn.asw-selected svg,
 .asw-btn.asw-selected span {
-    fill: #0848ca !important;
-    color: #0848ca !important;
+    fill: var(--asw-primary-color) !important;
+    color: var(--asw-primary-color) !important;
 }
 
 .asw-btn.asw-selected:after {
@@ -225,7 +225,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #0848ca!important;
+    background-color: var(--asw-primary-color)!important;
     color: #fff;
     padding: 6px;
     font-size: 10px;
@@ -255,7 +255,7 @@
 
 .asw-footer a:hover,
 .asw-footer a:hover span {
-    color: #0848ca!important;
+    color: var(--asw-primary-color)!important;
 }
 
 .asw-menu-content {

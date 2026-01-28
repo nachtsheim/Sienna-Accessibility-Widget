@@ -1,3 +1,8 @@
+.asw,
+.asw-container {
+    --asw-primary-color: #0048ff;
+}
+
 .asw-widget,
 .asw-menu {
     -webkit-user-select: none;
@@ -26,10 +31,9 @@
     display: flex;
     cursor: pointer;
     border: 3px solid white !important;
-    outline: 5px solid #0048ff!important;
+    outline: 5px solid var(--asw-primary-color) !important;
     text-decoration: none !important;
-    background: rgb(50,108,255) !important;
-    background: linear-gradient(96deg, rgba(50,108,255,1) 0%, rgba(0,72,255,1) 100%) !important;
+    background: var(--asw-primary-color) !important;
 }
 
 .asw-widget-bottom-left .asw-menu-btn {
