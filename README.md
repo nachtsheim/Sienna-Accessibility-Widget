@@ -15,11 +15,13 @@ Sienna: accessibility widget for websites. easy to install, just copy and paste 
 
 ### Dyslexia font from your own server
 
-By default the widget loads the dyslexia font OpenDyslexic from website-widgets.pages.dev. To serve the font from your own website, put a font file there and name it in the attribute `data-asw-font-url` of the script tag or of any other element:
+The widget loads the dyslexia font OpenDyslexic from your own website only: put a font file there and name it in the attribute `data-asw-font-url` of the script tag or of any other element:
 
 ```html
 <script src="/js/sienna.min.js" data-asw-font-url="/fonts/OpenDyslexic-Regular.woff2" defer></script>
 ```
+
+Without the attribute the widget loads no web font. The dyslexia-friendly mode then uses Comic Sans MS, Arial or Helvetica of the device, and the browser contacts no other host for the font.
 
 ## 🚀 Features
 
